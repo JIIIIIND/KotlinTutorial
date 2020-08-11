@@ -7,11 +7,7 @@ fun main() {
     val cnt = scan.nextInt()
     scan.nextLine()
     for (i in 1..cnt) {
-        println("The card #$i:")
-        val term = scan.nextLine()
-        println("The definition of the card #$i:")
-        val def = scan.nextLine()
-        cards.addList(term, def)
+        cards.insertCard(i, scan)
     }
     for (term in cards.list) {
         println("Print the definition of \"${term.key}\":")
