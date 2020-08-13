@@ -1,0 +1,34 @@
+Mutable Map
+- Mutable Map이란?
+	- 다른 객체를 위한 컨테이너
+	- 콜렉션이라고도 함
+	- 키 쌍과 관련 객체가 있음
+	- MutableMap<K, V>
+		- 모든 종류의 객체를 키와 값으로 사용할 수 있음
+- Initialization
+	- ex) val marathon = mutableMapOf(1 to "John", 2 to "Marty", 3 to "Marie")
+	- 숫자는 키, 문자열은 값
+	- 컴파일러는 자동으로 객체 타입을 정의
+	- 빈 맵을 정의하는 경우엔 타입을 명시적으로 지정
+		- val marathon = mutableMapOf<Int, String>()
+- Accessing elements
+	- marathon[1] = "John"
+	  marathon[2] = "Marty"
+	  marathon[3] = "Marie"
+	- 위의 맵과 동일한 쌍이 포함됨
+	- print(marathon)의 결과는 {1=John, 2=Marty, 3=Marie}
+	- 배열처럼 요소에 접근 할 수 있지만 인덱스가 아닌 키 값
+- Removing elements
+	-  marathon.remove(0) -> 키 값 0이 없기 때문에 아무 일도 하지 않음
+	- 지정된 값에 매핑 된 경우에만 지정된 키에 대한 항목을 제거 할 수 있음
+		- marathon.remove(1, "John...") -> 값이 John...이 아니기에 제거되지 않음
+	- marathon.clear() -> map 제거
+- Checking elements existence
+	- containsValue(), containsKey를 통해 항목이 존재하는지 확인 가능
+- Iterating through elements
+	- for (entry in marathon) { println(entry.value) } 와 같은 형식으로 순회 가능
+	- 또는 for ((key, value) in marathon) { println(value) } 가능
+	- 순서에 주의해야 함. 항목이 놓인 순서대로 반복되지만 자연스러운 순서는 아님
+- Counting elements
+	- size: how many entries there are in the map
+	- isEmpty(): map is empty or not

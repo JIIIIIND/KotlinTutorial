@@ -1,0 +1,43 @@
+Lambda expression
+- Functions without names
+	- fun(arguments): ReturnType { body }
+		- anonymous function이라고 함
+	- { arguments -> body }
+		- lambda expression이라고 함
+	- 인수 없는 람다식의 경우 화살표 없이 작성하면 됨
+		- { body }
+	- 이름 없는 함수를 사용하는 방법
+		- 함수를 변수에 할당 한 다음 변수를 호출하여 사용
+			- val mul1 = fun(a: Int, b: Int): Int {
+				return a * b
+			  }
+			- val mul2 = { a: Int, b: Int -> a * b }
+		- 함수를 인수로 전달하거나 다른 함수에서 이러한 함수를 반환 할 수 있음
+		- 함수 정의 바로 뒤에 원하는 인수와 함께 괄호를 배치하여 제자리에서 호출(거의 사용하지 않음)
+	- lambda 대신 anonymous function 이라고 말할 수 있음
+- Lambdas and syntactic sugar
+	- 코드 로직을 변경하지 않고 사람이 읽기 쉬운 코드를 만드는 방법: Syntactic sugar
+	- ex) filter 함수의 경우
+		fun isNotDot(c: Char): Boolean = c != '.'
+		val originalText = "I don't know... what to say..."
+		val textWithoutDots = originalText.filter(::isNotDot)
+	- 람다 식으로 변형하면 다음과 같이 가능
+		val originalText = "I don't know... what to say..."
+		val textWithoutDots = originalText.filter({ c: Char -> c != '.' })
+	- Kotlin은 많은 객체의 유형을 추론할 수 있으므로 Char를 생략 할 수 있음
+	- 람다가 마지막 인수로 전달되는 경우, 대괄호 시퀀스를 제거하여 괄호 밖에 람다를 쓸 수 있음
+		originalText.filter() { c -> c != '.' }
+	- 소괄호 속에 아무 내용이 없는 경우 생략 가능
+		originalText.filter { c -> c != '.' }
+	- 람다에 단일 매개 변수가 있는 경우 it으로 대체 가능
+		originalText.filter { it != '.' }
+- Complex lambdas
+	- 람다 함수가 여러 줄로 작성되는 경우 마지막 줄이 람다 함수의 반환 값이 됨
+	- 중간에 반환하는 경우, 정규화 된 반환 구문을 사용해야 함
+		- return@label value
+	- 레이블 이름은 일반적으로 람다가 전달 된 함수 이름
+- Capturing variables
+	- 런타임에 함수 생성의 이점
+		- 람다가 생성 된 곳에서 볼 수 있는 모든 변수와 값이 람다 내부에서도 볼 수 있다
+			- 람다가 람다 외부에서 선언 된 변수를 사용하는 경우 람다가 변수를 캡처한다고 함
+

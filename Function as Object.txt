@@ -1,0 +1,45 @@
+Functions as objects
+- First-class citizen
+	- First-class citizen은 다음과 같은 객체
+		- 변수로 저장할 수 있음
+		- 함수에 의해 반환 될 수 있음
+		- 인수로 함수에 전달할 수 있음
+		- 이름에 의존하지 않음(?)
+		- 프로그램이 실행 중에 생성 할 수 있음
+- Function types
+	- 코틀린에는 함수 유형에 대한 지원이 내장되어 있음
+	- 함수 유형의 구문은 다음과 같음
+		- (parameters type) -> return value type
+	- ex) fun sum(a: Int, b: Int): Int = a + b == (Int, Int) -> Int
+- Function references as objects
+	- 함수에 대한 참조를 가져올 수 있음
+	- 최상위 함수에 대한 참조를 얻으려면 이름 이전에 더블 콜론(::)을 적으면 됨
+	- 이름 뒤에 괄호나 인수를 작성 할 필요 없음
+	- ex) val sumObject = ::sum
+	- sumObject의 타입은 sum 함수
+	- 다음과 같이 작성할 수 있음
+		- val sumObject: (Int, Int) -> Int = ::sum
+- Functions returning other functions
+	fun getRealGrade(x: Double) = x
+	fun getGradeWithPenalty(x: Double) = x - 1
+	
+	fun getScoringFunction(isCheater: Boolean): (Double) -> Double {
+		if (isCheater) {
+			return ::getGradeWithPenalty
+		}
+		return ::getRealGrade
+	}
+	- 위의 getScoringFunction은 isCheater의 값에 따라 반환되는 함수가 다름
+- Function references as function parameters
+	- 다른 함수를 인수로 사용하는 함수를 만들 수 있음
+	fun applyAndSum(a: Int, b: Int, transformation: (Int) -> Int): Int {
+		return transformation(a) + transformation(b)
+	}
+
+- 실제 사용
+	- String유형의 filter기능
+	- 인수를 취하고 Boolean 결과를 리턴하는 함수
+	fun isNotDot(c: Char): Boolean = c != '.'
+	val originalText = "I don't know... what to say..."
+	val textWithoutDots = originalText.filter(::isNotDot)
+	-> 결과는 "I don't know what to say"
