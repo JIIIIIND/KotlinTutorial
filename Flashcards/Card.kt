@@ -9,33 +9,43 @@ class Cards {
         }
     }
 
-    fun insertCard(cnt: Int, scan: Scanner) {
-        println("The card #$cnt:")
-        var term = scan.nextLine()
-        while (checkTerm(term)) {
-            println("The card \"$term\" already exists. Try again:")
-            term = scan.nextLine()
+    fun ask(scan: Scanner) {
+        println("How many times to ask?")
+        val cnt = scan.nextLine().toInt()
+        for (i in 1..cnt) {
+            val term = list.keys.random()
+            println("Print the definition of \"${term}\":")
+            val answer = scan.nextLine()
+            checkAnswer(term, answer)
         }
-        println("The definition of the card #$cnt:")
+    }
+
+    fun insertCard(scan: Scanner) {
+        println("The card:")
+        var term = scan.nextLine()
+        if (list.containsKey(term)) {
+            println("The card \"$term\" already exists.\n")
+            return
+        }
+        println("The definition of the card:")
         var def = scan.nextLine()
-        while (checkDef(def)) {
-            println("The definition \"$def\" already exists. Try again:")
-            def = scan.nextLine()
+        if (list.containsValue(def)) {
+            println("The definition \"$def\" already exists.\n")
+            return
         }
         this.addList(term, def)
+        println("The pair (\"$term\":\"$def\") has been added.\n")
     }
-    fun checkTerm(term: String): Boolean {
-        if (list.containsKey(term)) {
-            return true
-        }
-        return false
+
+    fun deleteCard(scan: Scanner) {
+        println("Which card?")
+        val input = scan.nextLine()
+        if (list.containsKey(input)) {
+            println("The card has been removed\n")
+            list.remove(input)
+        } else println("Can't remove \"$input\": there is no such card\n")
     }
-    fun checkDef(def: String): Boolean {
-        if (list.containsValue(def)) {
-            return true
-        }
-        return false
-    }
+
     fun checkAnswer(key: String, def: String) {
         if (!list.isEmpty() && list[key].equals(def)) {
             println("Correct!")

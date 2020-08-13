@@ -1,0 +1,19 @@
+Read File
+- readText
+	- readText() method를 사용하여 읽어들일 수 있음
+	  val fileName = "src/reading.txt"
+	  val lines = File(fileName).readText()
+	  print(lines)
+	- 만약 없는 파일을 읽어들인다면 NoSuchFileException이 발생
+	- readText()가 자동으로 파일을 열고 닫음
+	- readText(Charsets.US_ASCII) 등과 같이 파일 인코딩 방식 지정 가능
+	- 2GB 이상의 파일은 코틀린이 제공하지 않음 -> OutOfMemoryError 발생
+	- 파일이 존재하는지 체크하는 함수 -> exists()
+	- File에 대해서 length()나 delete() 사용 가능
+- readLines
+	- readLines() 함수는 파일의 각 라인을 리스트로 저장함
+- readBytes
+	- readBytes() 함수는 파일 내용을 바이트 배열로 저장해야 하는 경우 유용함
+	- readText()에서 String으로 변환하는 메서드 구현으로 사용
+- forEachLine
+	- forEachLine()은 큰 파일을 읽을 때 추천됨

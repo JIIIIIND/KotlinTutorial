@@ -1,0 +1,21 @@
+Write File
+- Writing files with writeText()
+	- File 타입의 객체를 통해 파일 생성 및 작성
+	- val myFile = File("MyFile.txt")
+	- myFile.writeText("Hello, File")
+	- 현재 디렉토리가 아닌 다른 곳에 작성하는 경우 절대 경로를 File의 괄호 내부에 작성
+		- File("D://Users/myFile.txt")
+	- 파일에 액세스 제한이 있거나 이미 다른 프로세스에서 열려있는 경우 AccessDeniedException 발생
+	- 파일 이름은 별도의 문자열 변수에 넣어야 함
+- Formatting and processing
+	- 텍스트에 별도의 서식을 주고 싶은 경우 \문자를 활용하면 됨
+	- ex) 줄바꿈의 경우 \n, 들여쓰기의 경우 \t
+- Overwriting and appending
+	- 덮어쓰기의 경우 writeText()를 통해 동작함
+	- 만약 파일이 없다면 새로 생성함
+	- 이어쓰기의 경우 appendText()를 통해 동작함
+- Writing byte arrays
+	- writeBytes(array: ByteArray): 바이트 배열을 파일에 쓸 수 있음
+	  val arrayOfBytes = byteArrayOf(1, 2, 3)
+	  val myFile = File(fileName).appendBytes(arrayOfBytes)
+	- fileName파일에 16진수로 0102030a가 기록 됨(0a는 줄바꿈)
